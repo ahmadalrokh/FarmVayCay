@@ -1,0 +1,125 @@
+﻿@using Azure.Core
+@using Farm.Models.Models
+@using Farm.Models.VM
+@model List<Farms>
+
+<link rel="stylesheet" href="~/css/Farms.css" />
+<main class="main-container">
+    @* Searsh *@
+    <div class="search-container">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Start your search">
+            <button type="button" class="search-button">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </div>
+   
+    <div class="content-wrapper">
+        
+        <!-- Filter Section -->
+         <aside class="filters">
+             <form asp-area="Custmor" asp-action="Index"  method="post">
+                <h2>Filter By</h2>
+                @* Members *@
+                <div class="filter-section">
+                    <h3>Members number</h3>
+
+                    <div class="filter-option">
+                        <input type="radio" id="less-10" name="members" value="0"> <!--0 : less 10 -->
+                        <label for="less-10">Less than 10</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="10-20" name="members" value="1"> <!--1 : 10-20 -->
+                        <label for="10-20">10-20</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="more-20" name="members" value="2"> <!--2 : more-20 -->
+                        <label for="more-20">more than 20</label>
+                    </div>
+
+                </div>
+                @* Budget *@
+                <div class="filter-section">
+                    <h3>Budget</h3>
+
+                    <div class="filter-option">
+                        <input type="radio" id="low" name="budget" value="0"> <!--0 : low -->
+                        <label for="low">Low</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="medium" name="budget" value="1"> <!--1 : medium -->
+                        <label for="medium">Medium</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="high" name="budget" value="2"> <!--2 : high -->
+                        <label for="high">High</label>
+                    </div>
+
+                </div>
+                @* Rating *@
+                <div class="filter-section">
+                    <h3>Rating</h3>
+                    <div class="filter-option">
+                        <input type="radio" id="5-stars" name="rating" value="0"> <!--0 : 5-stars -->
+                        <label for="5-stars">5 Stars</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="4-stars" name="rating" value="1"> <!--1 : 4-stars -->
+                        <label for="4-stars">4 Stars</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="3-stars" name="rating" value="2"> <!--2 : 3-stars -->
+                        <label for="3-stars">3 Stars</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="2-stars" name="rating" value="3"> <!--3 : 2-stars -->
+                        <label for="2-stars">2 Stars</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="1-star" name="rating" value="4"> <!--4 : 1-stars -->
+                        <label for="1-star">1 Star</label>
+                    </div>
+                </div>
+                <button type="submit" class="research-btn">Filter</button>
+            </form>
+        </aside> 
+
+        <div id="noResultsMessage" >
+            No results matched your search.
+        </div>
+
+        <!-- Farms Grid -->
+        <div class="farms-grid" id="farmsGrid">
+            @* Get All Farms *@
+            @foreach (Farms farm in Model)
+            {
+               
+                <div class="farm-card" data-farm-name="@farm.FarmName" data-farm-location="@farm.Governorates">
+                    <div class="farm-image">
+                         <a asp-area="Custmor" asp-action="Details" asp-route-farmId="@farm.Id"> 
+                             <img src="@farm.FarmImages.FirstOrDefault().ImageUrl" alt="Farm Image"> 
+                         </a> 
+                        <a asp-area="Custmor" asp-action="AddToFa" asp-route-farmId="@farm.Id" class="favorite-btn">
+                            <i class="bi bi-heart"></i>
+                        </a>
+                    </div>
+                    <div class="farm-details">
+                        <h3>@farm.FarmName in @farm.Governorates</h3>
+                        <p>@farm.Room Bedrooms,@(farm.SwimingPool ? "Pool ," : "") @(farm.BarbecueArea ? "BBQ Area" : "")</p>
+                        <div class="price-rating">
+                            <span class="price">JD @farm.PricePerDay / Day</span>
+                            <span class="rating"> @(farm.Rating != 0 ? $"★ {@farm.Rating}" : "No Rating") </span>
+                        </div>
+                    </div>
+                </div>
+               
+            }
+        </div>
+        
+
+    </div>
+
+</main>
+<script src="~/js/FarmsPage.js"></script>
+

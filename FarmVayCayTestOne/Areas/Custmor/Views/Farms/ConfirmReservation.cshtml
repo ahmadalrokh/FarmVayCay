@@ -1,0 +1,130 @@
+﻿@using Farm.Models.VM
+@model PaymentVM
+
+<link rel="stylesheet" href="~/css/ConfirmReservation.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+
+<div class="payment-container">
+
+    <div class="booking-details">
+        <div class="farm-images">
+            @{
+                int dotCount = 0;
+            }
+            @foreach (var image in Model.Farms.FarmImages )
+            {
+                <img src="@image.ImageUrl" alt="Farm View" class="farm-image @(dotCount == 0 ? "active" : "")" />
+                dotCount++;
+            }
+        </div>
+
+        <!-- ✅ Dots -->
+        <div class="image-dots text-center mt-2">
+            @{
+                int dotIndex = 0;
+            }
+            @foreach (var image in Model.Farms.FarmImages )
+            {
+                <span class="dot @(dotIndex == 0 ? "active" : "")" data-index="@dotIndex"></span>
+                dotIndex++;
+            }
+        </div>
+
+        <div class="farm-info">
+            <h2>@Model.Farms.FarmName</h2>
+
+            <!-- ✅ Rating -->
+            <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>@Model.Farms.Rating</span>
+            </div>
+
+            <!-- ✅ Location -->
+            <p class="location"><i class="fas fa-map-marker-alt"></i> @Model.Farms.Governorates - Jordan</p>
+
+            <!-- ✅ Details -->
+            <p class="details">@Model.Farms.Room rooms, @Model.Farms.Flors floors, @Model.Farms.PathRoom bath rooms</p>
+
+            <!-- ✅ Check-in/out -->
+            <div class="dates">
+                <div class="check-in">
+                    <span>CHECK-IN</span>
+                    <p>@Model.Boking.StartDate.ToShortDateString()</p>
+                </div>
+                <div class="check-out">
+                    <span>CHECK-OUT</span>
+                    <p>@Model.Boking.EndDate.ToShortDateString()</p>
+                </div>
+            </div>
+
+            <!-- ✅ Price -->
+            <div class="price-details">
+                <div class="price-row">
+                    <span>@Model.Farms.PricePerDay JD × @((Model.Boking.EndDate - Model.Boking.StartDate).Days)</span>
+                    <span>@Model.Boking.TotalPrice JD</span>
+                </div>
+                <div class="total-price">
+                    <span>Total price</span>
+                    <span>@Model.Boking.TotalPrice JD</span>
+                </div>
+                <p class="transport-notice">Reservation From 9AM To 9PM</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ Payment Form -->
+    <div class="payment-details">
+        <form method="post">
+            <input type="hidden" asp-for="Boking.Id" />
+            <h2>Payment Method</h2>
+            <div class="payment-methods">
+                <i class="fab fa-cc-mastercard"></i>
+                <span>/</span>
+                <i class="fab fa-cc-visa"></i>
+            </div>
+
+            <h3>Payment Details</h3>
+
+            <div class="form-group">
+                <input type="text" asp-for="VayCayBank.CardName" placeholder="Enter Name on Card" required aria-label="Card holder name">
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="VayCayBank.CardNumber" placeholder="Card Number" required aria-label="Card number">
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="VayCayBank.ExpDate" placeholder="Expire Date" required aria-label="Card expiry date">
+            </div>
+
+            <div class="button-group">
+                <a asp-action="Details" asp-route-FarmId="@Model.Farms.Id" class="back-btn">Back</a>
+
+                <button type="submit" class="confirm-btn" asp-route-bookingId="@Model.Boking.Id" asp-route-farmId="@Model.Farms.Id" style="font:bold;">
+                    Confirm payment
+                    <span class="price">@Model.Boking.TotalPrice</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ✅ Image slider script -->
+<script>
+    const dots = document.querySelectorAll('.dot');
+    const images = document.querySelectorAll('.farm-image');
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const index = parseInt(dot.dataset.index);
+
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+            });
+
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
+        });
+    });
+</script>

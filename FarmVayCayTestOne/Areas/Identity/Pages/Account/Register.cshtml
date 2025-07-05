@@ -1,0 +1,73 @@
+﻿@page
+@using Farm.Utility
+@model RegisterModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started - FarmVayCay</title>
+    <link rel="stylesheet" href="~/css/register.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-section">
+            <h1> @(User.IsInRole(SD.Role_Admin) ? "Admin Portall | Add User " : "Get Started Now")</h1>
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                <div class="name-group">
+                    <div class="form-group">
+                        <input asp-for="Input.FirstName" placeholder="First Name" required>
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Input.LastName" placeholder="Last name" required>
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.PhoneNumper" placeholder="Phone Number" required>
+                    <span asp-validation-for="Input.PhoneNumper" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.Email" placeholder="Email address" required>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="password">
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" type="password" placeholder="Confirm password" required>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                @if(User.IsInRole(SD.Role_Admin))
+                {
+                    @* User Role *@
+                    <div class="form-group">
+                        <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="custom-input">
+                            <option disabled selected>--Select Role--</option>
+                        </select>
+                    </div>
+
+                }
+                <button id="registerSubmit" type="submit" class="signup-button">@(User.IsInRole(SD.Role_Admin)?"Add User":"Signup")</button>
+                @if (!User.IsInRole(SD.Role_Admin))
+                {
+                    <div class="divider">or</div>
+                    <div class="signin-link">
+                        Have an account? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Sign in</a>
+                    </div>
+                }
+            </form>
+        </div>
+        <div class="image-section"></div>
+    </div>
+</body>
+</html>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

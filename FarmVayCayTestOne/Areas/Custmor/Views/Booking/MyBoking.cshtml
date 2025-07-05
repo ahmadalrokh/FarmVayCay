@@ -1,0 +1,56 @@
+﻿@using Farm.Models.VM
+@using Farm.Utility
+@model List<FarmVM>
+
+<link rel="stylesheet" href="~/css/OwnerFarms.css" />
+
+<div class="farms-container">
+    <h2 class="title">Your Bookings</h2>
+
+    <!-- Active Bookings -->
+    <h3>⏳ Current Bookings</h3>
+    <div class="farm-list">
+        @foreach (var farm in Model.Where(f => f.boking.BookingStatus != SD.Booking_Canceled && f.boking.BookingStatus != SD.Booking_Completed).OrderBy(b => b.boking.EndDate))
+        {
+            @Html.Partial("_FarmCard", farm)
+        }
+    </div>
+
+    <!-- Completed Bookings -->
+    <h3 style="margin-top: 40px;">✅ Completed Bookings</h3>
+    <div class="farm-list">
+        @foreach (var farm in Model.Where(f => f.boking.BookingStatus == SD.Booking_Completed).OrderBy(b => b.boking.EndDate))
+        {
+            @Html.Partial("_FarmCard", farm)
+        }
+    </div>
+
+    <!-- Canceled Bookings -->
+    <h3 style="margin-top: 40px;">❌ Canceled Bookings</h3>
+    <div class="farm-list">
+        @foreach (var farm in Model.Where(f => f.boking.BookingStatus == SD.Booking_Canceled).OrderBy(b => b.boking.EndDate))
+        {
+            @Html.Partial("_FarmCard", farm)
+        }
+    </div>
+</div>
+@* Script for Delateing *@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Exit'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+</script>

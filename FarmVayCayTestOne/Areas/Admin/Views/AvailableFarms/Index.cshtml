@@ -1,0 +1,69 @@
+﻿@using Farm.Models.Models
+@model List<Farms>
+
+<link rel="stylesheet" href="~/css/Tabels.css">
+<div class="request-container">
+    
+    <div class="request-header">
+        <h1 class="request-title">Available Farms List </h1>
+        <div class="header-buttons">
+            <a asp-area="Admin" asp-action="Index" asp-route-status="Avalabel" class="header-btn add-btn">Available</a>
+            <a asp-area="Admin" asp-action="Index" asp-route-status="UnAvalabel" class="header-btn deleted-btn">UnAvailabel</a>
+        </div>
+    </div>
+    <table class="request-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Owner</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var farm in Model)
+            {
+                <tr>
+                    <td>@farm.Id</td>
+                    <td>@farm.FarmName</td>
+                    <td>@farm.Governorates</td>
+                    <td>@farm.User.Email</td>
+                    <td>@farm.IsAvailable</td>
+                    <td>
+                        <div class="action-buttons">
+                            <a class="view-button" asp-area="Admin" asp-action="ViewFarmsDetales" asp-route-farmId="@farm.Id">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+                          
+                            <a href="javascript:void(0)" class="delete-button" onclick="confirmDelete('@Url.Action("DeleteFarm", "AvailableFarms", new { farmId = farm.Id })')">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Exit'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+</script>

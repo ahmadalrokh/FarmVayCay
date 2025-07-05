@@ -1,0 +1,53 @@
+﻿@using Farm.Models.Models
+@model List<Farms>
+<link rel="stylesheet" href="~/css/OwnerFarms.css" />
+
+<div class="farms-container">
+
+    <h2 class="title">Your Farms</h2>
+
+    <div class="farm-list">
+
+        @* Get All Farms *@
+        @foreach (var farm in Model)
+        {
+            <div class="farm-card">
+               
+                <div class="farm-info">
+                    <h3>@farm.FarmName</h3>
+                    <p><strong>Location:</strong> @farm.Governorates</p>
+                    <p><strong>Price:</strong> JD @farm.PricePerDay / Day</p>
+                </div>
+                <div class="farm-actions">
+
+                    <a asp-action="EditFarm" asp-route-farmId="@farm.Id"  class="btn edit-btn">Edit</a>
+
+                    <a asp-action="Disable" asp-route-farmId="@farm.Id" class="farm-btn add-btn">Temporarily Disable</a>
+
+                    <a href="javascript:void(0)" class="btn disable-btn" onclick="confirmDelete('@Url.Action("Delete", "OwnerFeatures", new { farmId=farm.Id})')">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@* JS For Deleteing *@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Exit'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+</script>

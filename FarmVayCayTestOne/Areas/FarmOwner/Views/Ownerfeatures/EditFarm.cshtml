@@ -1,0 +1,223 @@
+﻿
+@using Farm.Models.VM
+@model FarmVM
+
+    <link rel="stylesheet" href="~/css/AddFarm.css">
+    
+    <main class="main-container">
+        <div class="add-farm-wrapper">
+            <h1>Update Your Farm - @Model.Farms.FarmName -</h1>
+ 
+        <form class="add-farm-form" asp-action="EdimFarm" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Farms.Id" />
+            @* farmName *@
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="@Model.Farms.FarmName">Farm name</label>
+                    <input asp-for="@Model.Farms.FarmName" placeholder="Farm name">
+                    <span asp-validation-for="@Model.Farms.FarmName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.Farms.PricePerDay">Price per night</label>
+                    <input asp-for="@Model.Farms.PricePerDay" placeholder="Enter price in JD">
+                    <span asp-validation-for="@Model.Farms.PricePerDay" class="text-danger"></span>
+                </div>
+            </div>
+            @* Governorates *@
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="@Model.Farms.Governorates">Governorates</label>
+                    <div class="select-wrapper">
+                        <select asp-for="@Model.Farms.Governorates">
+                                <option value="amman">Amman</option>
+                                <option value="irbid">Irbid</option>
+                                <option value="zarqa">Zarqa</option>
+                                <option value="aqaba">Aqaba</option>
+                                <option value="mafraq">Mafraq</option>
+                                <option value="balqa">Balqa</option>
+                                <option value="madaba">Madaba</option>
+                                <option value="karak">karak</option>
+                                <option value="tafilah">Tafilah</option>
+                                <option value="maan">Maan</option>
+                                <option value="jerash">jerash</option>
+                                <option value="ajloun">Ajloun</option>
+
+                        </select>
+                    </div>
+                <span asp-validation-for="@Model.Farms.Governorates" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.Farms.LocationUrl">Location Url</label>
+                    <input asp-for="@Model.Farms.LocationUrl" placeholder="Enter location">
+                    <span asp-validation-for="@Model.Farms.LocationUrl" class="text-danger"></span>
+                </div>
+            </div>
+            @* Discribtion *@
+            <div class="form-group">
+                <label asp-for="@Model.Farms.Description">Description</label>
+                <textarea asp-for="@Model.Farms.Description" placeholder="Enter Description" rows="4"></textarea>
+                <span asp-validation-for="@Model.Farms.Description" class="text-danger"></span>
+            </div>
+            <div class="amenities-section">
+                <div class="amenities-row">
+                    @* Rooms *@
+                    <div class="amenity-group">
+                        <label asp-for="@Model.Farms.Room">Rooms</label>
+                        <input asp-for="@Model.Farms.Room" min="0">
+                        <span asp-validation-for="@Model.Farms.Room" class="text-danger"></span>
+                    </div>
+                    @* PathRooms *@
+                    <div class="amenity-group">
+                        <label asp-for="@Model.Farms.PathRoom">Bath rooms</label>
+                        <input asp-for="@Model.Farms.PathRoom" min="0">
+                        <span asp-validation-for="@Model.Farms.PathRoom" class="text-danger"></span>
+                    </div>
+                    @* Flores *@
+                    <div class="amenity-group">
+                        <label asp-for="@Model.Farms.Flors">Floors</label>
+                        <input asp-for="@Model.Farms.Flors" min="0">
+                        <span asp-validation-for="@Model.Farms.Flors" class="text-danger"></span>
+                    </div>
+                    @* Gusets *@
+                    <div class="amenity-group">
+                        <label asp-for="@Model.Farms.Guests">Guests</label>
+                        <input asp-for="@Model.Farms.Guests" min="0">
+                        <span asp-validation-for="@Model.Farms.Guests" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    @* SwimingPool *@
+                    <div class="feature-item">
+                        <label asp-for="@Model.Farms.SwimingPool">Swimming Pool</label>
+                        <div class="radio-group">
+                            <input asp-for="@Model.Farms.SwimingPool" type="radio" id="pool-yes" value="true">
+                            <label for="pool-yes">Yes</label>
+
+                            <input asp-for="@Model.Farms.SwimingPool" type="radio" id="pool-no" value="false">
+                            <label for="pool-no">No</label>
+
+                            <span asp-validation-for="@Model.Farms.SwimingPool" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* BarbecueArea *@
+                    <div class="feature-item">
+                        <label asp-for="@Model.Farms.BarbecueArea">Barbecue area</label>
+                        <div class="radio-group">
+                            <input asp-for="@Model.Farms.BarbecueArea" type="radio" id="bbq-yes" value="true">
+                            <label for="bbq-yes">yes</label>
+                            <input asp-for="@Model.Farms.BarbecueArea" type="radio" id="bbq-no" value="false">
+                            <label for="bbq-no">No</label>
+                            <span asp-validation-for="@Model.Farms.BarbecueArea" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* ChildrenArea *@
+                    <div class="feature-item">
+                        <label asp-for="@Model.Farms.ChildrenArea">Children's play area</label>
+                        <div class="radio-group">
+                            <input asp-for="@Model.Farms.ChildrenArea" type="radio" id="playground-yes" value="true">
+                            <label for="playground-yes">yes</label>
+                            <input asp-for="@Model.Farms.ChildrenArea" type="radio" id="playground-no" value="false">
+                            <label for="playground-no">No</label>
+                            <span asp-validation-for="@Model.Farms.ChildrenArea" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* FootballField *@
+                    <div class="feature-item">
+                        <label asp-for="@Model.Farms.FootballField">Football field</label>
+                        <div class="radio-group">
+                            <input asp-for="@Model.Farms.FootballField" type="radio" id="football-yes" value="true">
+                            <label for="football-yes">yes</label>
+                            <input asp-for="@Model.Farms.FootballField" type="radio" id="football-no" value="false">
+                            <label for="football-no">No</label>
+                            <span asp-validation-for="@Model.Farms.ChildrenArea" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* BingPongTabel *@
+                    <div class="feature-item">
+                        <label asp-for="@Model.Farms.BingPongTabel">Ping-pong table</label>
+                        <div class="radio-group">
+                            <input asp-for="@Model.Farms.BingPongTabel" type="radio" id="pingpong-yes" value="true">
+                            <label for="pingpong-yes">yes</label>
+                            <input asp-for="@Model.Farms.BingPongTabel" type="radio" id="pingpong-no" value="false">
+                            <label for="pingpong-no">No</label>
+                            <span asp-validation-for="@Model.Farms.BingPongTabel" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* BilliardoTabel *@
+                    <div class="feature-item">
+                        <label asp-for="@Model.Farms.BilliardoTabel">Billiards table</label>
+                        <div class="radio-group">
+                            <input asp-for="@Model.Farms.BilliardoTabel" type="radio" id="billiards-yes" value="true">
+                            <label for="billiards-yes">yes</label>
+                            <input asp-for="@Model.Farms.BilliardoTabel" type="radio" id="billiards-no" value="false">
+                            <label for="billiards-no">No</label>
+                            <span asp-validation-for="@Model.Farms.BilliardoTabel" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* AirCondtioner *@
+                    <div class="feature-item">
+                        <label asp-for="@Model.Farms.AirCondtioner">Air conditioner</label>
+                        <div class="radio-group">
+                            <input asp-for="@Model.Farms.AirCondtioner" type="radio" id="ac-yes" value="true">
+                            <label for="ac-yes">yes</label>
+                            <input asp-for="@Model.Farms.AirCondtioner" type="radio" id="ac-no" value="false">
+                            <label for="ac-no">No</label>
+                            <span asp-validation-for="@Model.Farms.AirCondtioner" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* WIFI *@
+                    <div class="feature-item">
+                        <label asp-for="@Model.Farms.WIFI">Wifi</label>
+                        <div class="radio-group">
+                            <input asp-for="@Model.Farms.WIFI" type="radio" name="wifi" id="wifi-yes" value="true">
+                            <label for="wifi-yes">yes</label>
+                            <input asp-for="@Model.Farms.WIFI" type="radio" name="wifi" id="wifi-no" value="false">
+                            <label for="wifi-no">No</label>
+                            <span asp-validation-for="@Model.Farms.WIFI" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            @*Adding Image*@
+            <div class="farm-images-header">
+                <label class="farm-images-label">Farm @Model.Farms.FarmName Image</label>
+
+                <a asp-area="FarmOwner" asp-controller="OwnerFeatures" asp-action="AddImage"
+                   asp-route-farmId="@Model.Farms.Id"
+                   class="farm-btn add-btn">
+                    + Add new Image
+                </a>
+            </div>
+
+            @* Image Updateting *@
+            <div class="farm-images-row">
+                @foreach (var image in Model.farmImages)
+                {
+                    <div class="farm-image-container">
+                        <img src="@image.ImageUrl" alt="FarmImage">
+                        <div class="farm-image-actions">
+                            <a asp-area="FarmOwner" asp-controller="OwnerFeatures" asp-action="UpdateImage"
+                               asp-route-imageId="@image.Id" class="farm-btn update-btn" style="text-decoration:none;">Update</a>
+                            <a asp-area="FarmOwner" asp-controller="OwnerFeatures" asp-action="DeleteImage"
+                               asp-route-imageId="@image.Id" class="farm-btn delete-btn" style="text-decoration:none;">Delete</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            <div style="text-align:center">
+                <button type="submit" class="next-btn">Update!</button>
+
+                <a asp-action="MyFarms" class="next-btn"
+                   style="background-color:darkgray; text-decoration:none;">
+                    Cancel
+                </a>
+            </div> 
+            </form>
+        </div>
+    </main>

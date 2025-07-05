@@ -1,0 +1,232 @@
+﻿@using Farm.Models.VM
+@model DetailsVM
+
+<link rel="stylesheet" href="~/css/Details.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<div id="navbar-container"></div>
+
+<main class="main-container">
+    <input asp-for="Farms.Id" type="hidden" />
+    <div class="farm-details-wrapper">
+        <div class="farm-header">
+            <h1>@Model.Farms.FarmName</h1>
+            <a asp-area="Custmor" asp-controller="Farms" asp-action="AddToFa" asp-route-farmId="@Model.Farms.Id" class="favorite-btn">
+                <i class="bi bi-heart"></i>
+            </a>
+        </div>
+
+        <div class="image-slider">
+
+            <button class="slider-btn prev">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            @foreach (var Image in Model.farmImages)
+            {
+                <div class="slider-image">
+                    <img src="@Image.ImageUrl" alt="Farm Image">
+                </div>
+            }
+            <button class="slider-btn next">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+
+       
+
+        <div class="farm-info">
+            <div class="location-info">
+                <div class="location-header">
+                    <div class="title-with-location">
+                        <h2>@Model.Farms.Governorates-Jordan</h2>
+                        <div class="location-text">
+                            <span>Location</span>
+                            <a href="@Model.Farms.LocationUrl" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-with-rating">
+                    <p>@Model.Farms.Room rooms, @Model.Farms.PathRoom bathrooms, @Model.Farms.Flors floors</p>
+                    <div class="location-rating">
+                        <span class="rating-value">@Model.Farms.Rating </span>
+                        <span class="star">★</span>
+                        <span class="rating-value">(@Model.Count +)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="amenities-section">
+                <h3>What this place offers</h3>
+                <div class="amenities-grid">
+                    @if(Model.Farms.BarbecueArea){
+                        <div class="amenity-item">
+                            <i class="fas fa-umbrella-beach"></i>
+                            <span>Barbecue area</span>
+                        </div>
+                    }
+                    @if (Model.Farms.AirCondtioner)
+                    {
+                        <div class="amenity-item">
+                            <i class="fas fa-snowflake"></i>
+                            <span>Air conditioner</span>
+                        </div>
+                    }
+                    
+                    @if (Model.Farms.SwimingPool)
+                    {
+                        <div class="amenity-item">
+                            <i class="fas fa-swimming-pool"></i>
+                            <span>Swimming pool</span>
+                        </div>
+                    }
+                    @if (Model.Farms.BingPongTabel)
+                    {
+                        <div class="amenity-item">
+                             <i class="fas fa-table-tennis"></i>
+                            <span>Ping-pong table</span>
+                        </div>
+                    }
+                    @if (Model.Farms.BilliardoTabel)
+                    {
+                        <div class="amenity-item">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Billiards table</span>
+                        </div>
+                    }
+                    @if (Model.Farms.ChildrenArea)
+                    {
+                        <div class="amenity-item">
+                            <i class="fas fa-child"></i>
+                            <span>Children's play area</span>
+                        </div>
+                    }
+                    @if (Model.Farms.FootballField)
+                    {
+                        <div class="amenity-item">
+                            <i class="fas fa-futbol"></i>
+                            <span>Football field</span>
+                        </div>
+                    }
+                    @if (Model.Farms.WIFI)
+                    {
+                        <div class="amenity-item">
+                            <i class="fas fa-wifi"></i>
+                            <span>WiFi</span>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!--Boking farms-->
+
+            <form method="post" asp-area="Custmor" asp-controller="Farms" asp-action="Reservation">
+                @Html.AntiForgeryToken()
+
+                
+                <input asp-for="Farms.Id" type="hidden" />
+                
+
+                <div class="booking-section">
+                    <div class="date-picker">
+                        <div class="date-input">
+                            <label asp-for="Boking.StartDate">Check-in</label>
+                            <input type="text" id="startDate" name="boking.StartDate" required />
+                           
+
+                        </div>
+                        <div class="date-input">
+                            <label asp-for="Boking.EndDate">Check-out</label>
+                            <input type="text" id="endDate" name="boking.EndDate" required />
+                        </div>
+                    </div>
+                    <div class="guest-input">
+                        <label asp-for="Boking.Guests">GUESTS</label>
+                        <input asp-for="Boking.Guests" type="number" id="guests" min="1" value="1">
+                    </div>
+                   
+                    <hr class="booking-divider">                     
+                    <button type="submit" asp-route-farmId="@Model.Farms.Id" class="reservation-btn">Continue</button>
+                </div>
+                
+            </form>
+
+            <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+            <div class="owner-section">
+                <h3> Owner Detales </h3>
+                <div class="owner-info">
+                    @if(Model.Farms.User.ImageUrl!=null){
+                        <img src="@Model.Farms.User.ImageUrl" alt="Owner" class="owner-image">
+                    }
+                    else{
+                        <img src="~/UserImage/ProfileImageIfNone.jpeg" alt="Owner" class="owner-image">
+                    }
+                    
+                    <div class="owner-details">
+                        <h3>@(Model.Farms.User.FirstName+" "+Model.Farms.User.LastName)</h3>
+                        <p class="email">@Model.Farms.User.Email</p>
+                        <p class="phone">@Model.Farms.User.PhoneNumber</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reviews-section">
+                <h3> Reviews </h3>
+                <div class="reviews-list">
+                    <div class="review-item">
+                        
+                        @foreach(var review in Model.rating)
+                        {
+                            <div class="reviewer-info">
+                                <img src="@review.User.ImageUrl" alt="Reviewer">
+                            <div class="reviewer-details">
+                                <h4>@(review.User.FirstName+" "+review.User.LastName)</h4>
+                                <div class="rating">@review.stars ★</div>
+                            </div>
+                            </div>
+                            <p class="review-text">@review.Comment</p>
+                            <br />
+                            <br />
+                        }
+                            
+                    </div>
+                    <!-- Repeat review-item for more reviews -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="~/js/ImageSlider.js"></script>   
+<!-- Flatpickr CSS & JS -->
+
+<link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    var reservedDates = @Html.Raw(Json.Serialize(Model.ResevedDate));
+
+     flatpickr("#startDate", {
+         minDate: "today",
+         disable: reservedDates,
+         dateFormat: "Y-m-d",
+         onChange: function(selectedDates, dateStr) {
+             if (selectedDates.length > 0) {
+                 var minEnd = new Date(selectedDates[0]);
+                 minEnd.setDate(minEnd.getDate() + 1);
+                 endPicker.set("minDate", minEnd);
+             }
+         }
+     });
+
+     var endPicker = flatpickr("#endDate", {
+         minDate: new Date().fp_incr(1),
+         disable: reservedDates,
+         dateFormat: "Y-m-d"
+     });
+
+</script>
+
+
+
+

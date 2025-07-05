@@ -1,0 +1,93 @@
+﻿@using Farm.Models.VM
+@model ProfileViewModel
+<link rel="stylesheet" href="~/css/Profile.css" />
+
+    <main class="main-container">
+        <div class="profile-wrapper">
+        <div class="profile-info">
+            <div class="profile-image">
+                @if(Model.User.ImageUrl!=null){
+                    <img src="@Model.User.ImageUrl" alt="" class="profile-pic">
+                }
+                else{
+                    <img src="~/UserImage/ProfileImageIfNone.jpeg" alt="" class="profile-pic">
+                }
+                
+            </div>
+            
+            <form asp-action="UpdateImage" method="post" enctype="multipart/form-data">
+               
+                <input type="file" name="file" asp-for="User.ImageUrl" id="profile-upload"
+                       style="display: none;"
+                       onchange="this.form.submit()" />
+
+                
+                <button type="button" class="update-btn" onclick="document.getElementById('profile-upload').click()">
+                    Update Image
+                </button>
+            </form>
+
+
+            
+            <div class="user-details">
+                <h2> <i class="bi bi-person-fill"></i> @(Model.User.FirstName + " " + Model.User.LastName)</h2>
+                <p><i class="bi bi-envelope-check"></i> @Model.User.Email</p>
+                <p><i class="bi bi-telephone"></i> @Model.User.PhoneNumber</p>
+                <p><i class="bi bi-geo-alt"></i> Jordan, @Model.User.City</p>
+            </div>
+        </div> 
+        <!-- Edit Profile Section -->
+            <div class="edit-section">
+                <div class="edit-profile">
+                    <h2>Edit profile</h2>
+                <form method="post" asp-action="UpdateProfile">
+                    <div class="form-group">
+                        <label>First name</label>
+                        <input type="text" asp-for="User.FirstName" value="@Model.User.FirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last name</label>
+                        <input type="text" asp-for="User.LastName" value="@Model.User.LastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone number</label>
+                        <input type="tel" asp-for="User.PhoneNumber" value="@Model.User.PhoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" asp-for="User.City" value="@Model.User.City" required>
+                    </div>
+                    <div class="form-group">
+                        <label>StreetAddress</label>
+                        <input type="text" asp-for="User.StreetAddress" value="@Model.User.StreetAddress" required>
+                    </div>
+                    <button type="submit" class="save-btn">Save</button>
+                </form>
+
+                </div>
+
+                <!-- Change Password Section -->
+                <div class="change-password">
+                    <h2>Change password</h2>
+                <form method="post" asp-action="ChangePassword">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-group">
+                        <label>Current password</label>
+                        <input type="password" asp-for="CurrentPassword" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label>New password</label>
+                        <input type="password" asp-for="NewPassword" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Re-type password</label>
+                        <input type="password" asp-for="ConfirmPassword" autocomplete="off" required>
+                    </div>
+                    
+                    <button type="submit" class="save-btn">Save</button>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </main>

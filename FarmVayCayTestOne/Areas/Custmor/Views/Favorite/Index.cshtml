@@ -1,0 +1,34 @@
+﻿@using Farm.Models.Models
+@model List<Favorite>
+<link rel="stylesheet" href="~/css/Favorite.css" />
+
+<main class="main-container">
+    <div class="favorites-grid">
+        <!-- Favorite Farm Card 1 -->
+
+        @foreach(Favorite favorite in Model)
+        {
+           
+            <div class="farm-card">
+                <div class="farm-image">
+                    <a asp-area="Custmor" asp-controller="Farms" asp-action="Details" asp-route-farmId="@favorite.FarmId">
+                        <img src="@favorite.Farm.FarmImages.FirstOrDefault().ImageUrl" alt="Farm 1">
+                    </a>
+                    <a asp-area="Custmor" asp-action="Remove" asp-route-farmId="@favorite.FarmId" class="favorite-btn active">
+                        <i class="bi bi-heart-fill"></i>
+                    </a>
+                </div>
+                <div class="farm-details">
+                    <h3>@favorite.Farm.FarmName , @favorite.Farm.Governorates -Jordan</h3>
+                    <p>@favorite.Farm.Room bedrooms, swimming pool, barbecue area, @favorite.Farm.PathRoom bath</p>
+                    <div class="price-rating">
+                        <span class="price">JD @favorite.Farm.PricePerDay Day</span>
+                        <span class="rating">★ @favorite.Farm.Rating </span>
+                    </div>
+                </div>
+            </div>
+            
+             
+        }
+    </div>
+</main>

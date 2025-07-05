@@ -1,0 +1,480 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.main-container {
+    padding: 80px 20px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.request-farm-wrapper {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-slider {
+    position: relative;
+    width: 70%;
+    height: 400px;
+    margin: 0 auto 30px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.slider-image {
+    width: 100%;
+    height: 100%;
+}
+
+    .slider-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #333;
+    transition: all 0.2s;
+}
+
+    .slider-btn:hover {
+        background: white;
+    }
+
+    .slider-btn.prev {
+        left: 20px;
+    }
+
+    .slider-btn.next {
+        right: 20px;
+    }
+
+.request-farm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.owner-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 0;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+    .contact-info p {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group label {
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.2s;
+}
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        border-color: #3dd5bf;
+        outline: none;
+    }
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+    .select-wrapper::after {
+        content: '▼';
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        pointer-events: none;
+        font-size: 0.8rem;
+    }
+
+    .select-wrapper select {
+        width: 100%;
+        appearance: none;
+        padding-right: 30px;
+        background: white;
+    }
+
+.amenities-section {
+    margin: 20px 0;
+}
+
+.amenities-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.amenity-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+    .amenity-group label {
+        color: #333;
+        font-size: 0.95rem;
+    }
+
+    .amenity-group input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+
+.features-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.feature-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+    .feature-item label {
+        color: #333;
+        font-size: 1rem;
+        text-align: center;
+        font-weight: 500;
+    }
+
+.radio-group {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+}
+
+    .radio-group input[type="radio"] {
+        display: none;
+    }
+
+    .radio-group label {
+        padding: 8px 20px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .radio-group input[type="radio"]:checked + label {
+        background: #3dd5bf;
+        color: white;
+        border-color: #3dd5bf;
+    }
+
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.reject-btn,
+.accept-btn {
+    padding: 14px 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+    border: none;
+}
+
+.reject-btn {
+    background: #ff4d4d;
+    color: white;
+}
+
+    .reject-btn:hover {
+        background: #ff3333;
+    }
+
+.accept-btn {
+    background: #3dd5bf;
+    color: white;
+}
+
+    .accept-btn:hover {
+        background: #2cc1ac;
+    }
+
+.request-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: right;
+}
+
+.request-id, .request-date {
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+/*Back Toooo List*/
+
+.back-to-list-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #3dd5bf;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    z-index: 1000;
+}
+
+    .back-to-list-btn:hover {
+        background: #2bb3a1;
+    }
+
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .main-container {
+        padding: 70px 20px 40px;
+        max-width: 1000px;
+    }
+
+    .image-slider {
+        width: 75%;
+        height: 380px;
+    }
+
+    .form-row, .amenities-row {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-container {
+        padding: 60px 20px 30px;
+        max-width: 900px;
+    }
+
+    .request-farm-wrapper {
+        padding: 30px;
+    }
+
+    .image-slider {
+        width: 80%;
+        height: 350px;
+    }
+
+    .amenities-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .feature-row {
+        gap: 15px;
+    }
+
+    .feature-item {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-container {
+        max-width: 800px;
+    }
+
+    .image-slider {
+        width: 85%;
+        height: 320px;
+    }
+
+    .request-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .request-details {
+        text-align: left;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .owner-info {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 50px 15px 30px;
+        max-width: 700px;
+    }
+
+    .request-farm-wrapper {
+        padding: 25px;
+    }
+
+    .image-slider {
+        width: 90%;
+        height: 300px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .feature-row {
+        grid-template-columns: 1fr;
+    }
+
+    .radio-group {
+        gap: 20px;
+    }
+
+        .radio-group label {
+            padding: 8px 15px;
+        }
+
+    .button-group {
+        gap: 15px;
+    }
+
+    .reject-btn, .accept-btn {
+        padding: 12px 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 40px 10px 25px;
+    }
+
+    .request-farm-wrapper {
+        padding: 20px;
+    }
+
+    .image-slider {
+        width: 95%;
+        height: 250px;
+    }
+
+    .amenities-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .feature-item {
+        padding: 15px 10px;
+    }
+
+    .radio-group label {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* For high-resolution displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .feature-item {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+}

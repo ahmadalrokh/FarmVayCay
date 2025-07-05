@@ -1,0 +1,238 @@
+﻿@using Farm.Models.VM
+@model FarmVM
+
+<link rel="stylesheet" href="~/css/RequsestFarms.css">
+
+<main class="main-container">
+    <div class="request-farm-wrapper">
+        <div class="image-slider">
+            <button class="slider-btn prev"><i class="bi bi-chevron-left"></i></button>
+            @foreach (var Image in Model.farmImages)
+            {
+                <div class="slider-image">
+                    <img src="@Image.ImageUrl" alt="Farm Image">
+                </div>
+                
+
+            }
+            <button class="slider-btn next"><i class="bi bi-chevron-right"></i></button>
+        </div>
+
+        <form method="Post" class="request-farm-form">
+            <div class="request-header">
+                <div class="owner-info">
+                    <img src="@Model.Farms.User.ImageUrl" alt="Profile" class="profile-icon">
+                    <div class="contact-info">
+                        <p class="email">@Model.Farms.User.Email</p>
+                        <p class="phone">@Model.Farms.User.PhoneNumber</p>
+                    </div>
+                </div>
+                @* <div class="request-details"> *@
+                @*     <p class="request-id">Request ID: 1445638377</p> *@
+                @*     <p class="request-date">Request date: 10-10-2020</p> *@
+                @* </div> *@
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="Farms.FarmName">@Model.Farms.FarmName</label>
+                    <input asp-for="Farms.FarmName" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Farms.PricePerDay">Price per day</label>
+                    <input type="number" asp-for="Farms.PricePerDay" disabled>
+                </div>
+            </div>
+
+            <div class="form-row">
+                @* <div class="form-group"> *@
+                @*     <label>Governorates</label> *@
+                @*     <div class="select-wrapper"> *@
+                @*         <select> *@
+                @*             <option value="amman">Amman, Jordan</option> *@
+                @*             <option value="irbid">Irbid</option> *@
+                @*             <option value="zarqa">Zarqa</option> *@
+                @*             <option value="aqaba">Aqaba</option> *@
+                @*             <option value="mafraq">Mafraq</option> *@
+                @*             <option value="balqa">Balqa</option> *@
+                @*             <option value="madaba">Madaba</option> *@
+                @*             <option value="karak">Karak</option> *@
+                @*             <option value="tafilah">Tafilah</option> *@
+                @*             <option value="maan">Maan</option> *@
+                @*             <option value="jerash">Jerash</option> *@
+                @*             <option value="ajloun">Ajloun</option> *@
+                @*         </select> *@
+                @*     </div> *@
+                @* </div> *@
+                <div class="form-group">
+                    <label asp-for="Farms.Governorates">Governorate</label>
+                    <input asp-for="Farms.Governorates" type="text" disabled>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Farms.LocationUrl">Location</label>
+                    <input asp-for="Farms.LocationUrl" type="text" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Farms.Description">Description</label>
+                <textarea asp-for="Farms.Description" disabled rows="4"></textarea>
+            </div>
+
+            <div class="amenities-section">
+                <div class="amenities-row">
+                    <div class="amenity-group">
+                        <label asp-for="Farms.Room">Rooms</label>
+                        <input asp-for="Farms.Room" type="number" disabled>
+                    </div>
+                    <div class="amenity-group">
+                        <label asp-for="Farms.PathRoom">Bath rooms</label>
+                        <input asp-for="Farms.PathRoom" type="number" disabled>
+                    </div>
+                    <div class="amenity-group">
+                        <label asp-for="Farms.Flors">Floors</label>
+                        <input asp-for="Farms.Flors" type="number" disabled>
+                    </div>
+                    <div class="amenity-group">
+                        <label asp-for="Farms.Guests">Guests</label>
+                        <input type="number" asp-for="Farms.Guests" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <div class="feature-row">
+                    <div class="feature-item">
+                        <label>Swimming pool</label>
+                        <div class="radio-group">
+                            @if(Model.Farms.SwimingPool){
+                                 
+                                <label >yes</label>
+                            }
+                            else{
+                                
+                                <label >No</label>
+                            }
+                           
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <label>Barbecue area</label>
+                        <div class="radio-group">
+                           
+                            @if(Model.Farms.BarbecueArea){
+                                 
+                                <label >yes</label>
+                            }
+                            else{
+                                
+                                <label >No</label>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-item">
+                        <label>Children's play area</label>
+                        <div class="radio-group">
+                            @* <input type="radio" name="playground" id="playground-yes"> *@
+                            @* <label for="playground-yes">yes</label> *@
+                            @* <input type="radio" name="playground" id="playground-no" checked> *@
+                            @* <label for="playground-no">No</label> *@
+                            @if(Model.Farms.ChildrenArea){
+                                 
+                                <label >yes</label>
+                            }
+                            else{
+                                
+                                <label >No</label>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <label>Football field</label>
+                        <div class="radio-group">
+                            @if(Model.Farms.FootballField){
+                                 
+                                <label >yes</label>
+                            }
+                            else{
+                                
+                                <label >No</label>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-item">
+                        <label>Air conditioner</label>
+                        <div class="radio-group">
+                            @if(Model.Farms.AirCondtioner){
+                                 
+                                <label >yes</label>
+                            }
+                            else{
+                                
+                                <label >No</label>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <label>Wifi</label>
+                        <div class="radio-group">
+                            @if(Model.Farms.WIFI){
+                                 
+                                <label  >yes</label>
+                            }
+                            else{
+                                
+                                <label >No</label>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <a asp-area="Admin" asp-action="RejectFarm" asp-route-farmId="@Model.Farms.Id" class="reject-btn" style="text-decoration:none;">
+                    Reject</a>
+                <a asp-area="Admin" asp-action="AcceptFarm" asp-route-farmId="@Model.Farms.Id" class="accept-btn" style="text-decoration:none;">
+                    Accept</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+ <script>
+         document.addEventListener("DOMContentLoaded", function () {
+        const images = document.querySelectorAll(".slider-image");
+        const prevButton = document.querySelector(".prev");
+        const nextButton = document.querySelector(".next");
+        let currentIndex = 0;
+
+        function updateSlider() {
+            images.forEach((img, index) => {
+                img.style.display = index === currentIndex ? "block" : "none";
+            });
+        }
+
+        prevButton.addEventListener("click", function () {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateSlider();
+        });
+
+        nextButton.addEventListener("click", function () {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateSlider();
+        });
+
+        updateSlider(); 
+    });
+
+</script>   

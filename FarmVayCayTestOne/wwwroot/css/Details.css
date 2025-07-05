@@ -1,0 +1,601 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.main-container {
+    padding: 100px 20px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.farm-details-wrapper {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.farm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .farm-header h1 {
+        font-size: 2rem;
+        color: #333;
+    }
+
+.favorite-btn {
+    background: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+    .favorite-btn i {
+        font-size: 1.2rem;
+        color: #666;
+    }
+
+    .favorite-btn:hover {
+        transform: scale(1.1);
+    }
+
+.image-slider {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.slider-image {
+    width: 100%;
+    height: 100%;
+}
+
+    .slider-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #333;
+    transition: all 0.2s;
+}
+
+    .slider-btn:hover {
+        background: white;
+    }
+
+    .slider-btn.prev {
+        left: 20px;
+    }
+
+    .slider-btn.next {
+        right: 20px;
+    }
+
+.farm-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+}
+
+.location-info {
+    width: 100%;
+}
+
+.location-header {
+    margin-bottom: 8px;
+}
+
+.title-with-location {
+    display: flex;
+    align-items: center;
+    gap: 376px;
+}
+
+    .title-with-location h2 {
+        margin-bottom: 0;
+    }
+
+.location-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+    .location-text i {
+        color: #333;
+        font-size: 1.2rem;
+    }
+
+.details-with-rating {
+    display: flex;
+    align-items: center;
+    gap: 309px;
+    margin-top: 10px;
+}
+
+    .details-with-rating p {
+        color: #666;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+.location-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+}
+
+    .location-rating .rating-value {
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .location-rating .star {
+        color: #3dd5bf;
+        font-size: 1.1rem;
+    }
+
+.location-info .rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.location-info .star {
+    color: #3dd5bf;
+    font-size: 1.1rem;
+}
+
+.location-info .rating-value {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.amenities-section {
+    max-width: 350px;
+    margin: 0;
+}
+
+    .amenities-section h3 {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 12px;
+    }
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 8px;
+}
+
+.amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    transition: transform 0.2s;
+    max-width: 160px;
+}
+
+    .amenity-item:hover {
+        transform: translateY(-2px);
+    }
+
+    .amenity-item i {
+        font-size: 1rem;
+        color: #3dd5bf;
+    }
+
+    .amenity-item span {
+        color: #333;
+        font-size: 0.85rem;
+    }
+
+.booking-section {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    position: absolute;
+    right: 30px;
+    top: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.date-picker {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.date-input {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+    .date-input label {
+        color: #333;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    .date-input input, .guest-input input, .transport-input input {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        width: 100%;
+        height: 36px;
+        box-sizing: border-box;
+    }
+
+        .guest-input input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+            .guest-input input[type="number"]::-webkit-outer-spin-button,
+            .guest-input input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+.transport-input input {
+    background-color: white;
+    cursor: pointer;
+}
+
+    .transport-input input:focus {
+        outline: none;
+        border-color: #3dd5bf;
+    }
+
+.booking-divider {
+    border: none;
+    border-top: 1px solid #bbbbbb;
+    margin: 0 0 15px 0;
+}
+
+.reserve-btn, .reservation-btn {
+    width: 100%;
+    padding: 10px;
+    background: #3dd5bf;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 8px;
+}
+
+.price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 3px;
+}
+
+.price-text, .total-price-label, .total-price {
+    font-size: 0.9rem;
+}
+
+.transport-notice {
+    color: #ff0000;
+    font-size: 0.8rem;
+    margin-top: 8px;
+    text-align: left;
+}
+
+.reservation-btn {
+    margin-top: 10px;
+}
+
+.owner-section {
+    margin-top: 30px;
+    max-width: 400px;
+}
+
+.owner-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    width: 100%;
+}
+
+.owner-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.owner-details h3 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.owner-details p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+}
+
+.reviews-section {
+    margin-top: 30px;
+}
+
+    .reviews-section h3 {
+        font-size: 1.3rem;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-item {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 12px;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+    .reviewer-info img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+.reviewer-details h4 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.rating {
+    color: #3dd5bf;
+    font-size: 1rem;
+}
+
+.review-text {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .main-container {
+        max-width: 1000px;
+    }
+
+    .image-slider {
+        height: 450px;
+    }
+
+    .booking-section {
+        right: calc((100% - 1000px) / 2 + 30px);
+    }
+}
+
+@media (max-width: 992px) {
+    .main-container {
+        max-width: 800px;
+        padding: 80px 20px 30px;
+    }
+
+    .farm-details-wrapper {
+        padding: 25px;
+    }
+
+    .image-slider {
+        height: 400px;
+    }
+
+    .amenities-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .amenity-item {
+        padding: 12px;
+    }
+
+    .booking-section {
+        position: static;
+        right: auto;
+        margin-top: 30px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 60px 15px 25px;
+    }
+
+    .farm-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .image-slider {
+        height: 350px;
+    }
+
+    .location-info h2 {
+        font-size: 1.3rem;
+    }
+
+    .location-info p {
+        font-size: 1rem;
+    }
+
+    .date-picker {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .owner-info {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .owner-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .owner-section {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-container {
+        padding: 50px 10px 20px;
+    }
+
+    .farm-details-wrapper {
+        padding: 20px;
+    }
+
+    .farm-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .image-slider {
+        height: 300px;
+    }
+
+    .slider-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .amenities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .amenity-item {
+        padding: 10px;
+    }
+
+    .review-item {
+        padding: 15px;
+    }
+
+    .reviewer-info img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 400px) {
+    .farm-details-wrapper {
+        padding: 15px;
+    }
+
+    .image-slider {
+        height: 250px;
+    }
+
+    .farm-info {
+        gap: 20px;
+    }
+
+    .amenity-item span {
+        font-size: 0.9rem;
+    }
+
+    .date-input input,
+    .reserve-btn {
+        padding: 10px;
+        font-size: 1rem;
+    }
+}
+
+/* For high-resolution displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .farm-details-wrapper {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* For landscape orientation on mobile devices */
+@media (max-height: 600px) and (orientation: landscape) {
+    .main-container {
+        padding: 20px 15px;
+    }
+
+    .image-slider {
+        height: 250px;
+    }
+
+    .farm-info {
+        gap: 20px;
+    }
+}

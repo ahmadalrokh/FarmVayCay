@@ -1,0 +1,77 @@
+﻿
+@using Farm.Models.VM
+@model RatingVM
+
+<link rel="stylesheet" href="~/css/Rating.css">
+
+<div class="page-container">
+    <form id="feedbackForm" name="feedbackForm" method="post">
+        <input type="hidden" asp-for="Farm.Id" />
+        <input type="hidden" asp-for="Boking.Id" />
+
+        <div class="feedback-container">
+            
+            <h2 class="farm-name">@Model.Farm.FarmName Farm Rating</h2>
+            @* IsClean *@
+            <div class="question-row">
+                <span>Was the farm clean when received?</span>
+                <div class="button-group">
+                    <input style="display:none" asp-for="Rating.IsClean" type="radio" id="clean-yes" value="true">
+                    <label class="yn-btn" for="clean-yes">Yes</label>
+
+                    <input style="display:none" asp-for="Rating.IsClean" type="radio" id="clean-no" value="false">
+                    <label class="yn-btn" for="clean-no">No</label>
+                </div>
+                <span asp-validation-for="Rating.IsClean" class="text-danger"></span>
+            </div>
+            @* IsFacilities *@
+            <div class="question-row">
+                <span>Were all the facilities in the picture in reality?</span>
+                <div class="button-group">
+                    <input style="display:none" asp-for="Rating.IsFacilities" type="radio" id="Fac-yes" value="true">
+                    <label class="yn-btn" for="Fac-yes">Yes</label>
+
+                    <input style="display:none" asp-for="Rating.IsFacilities" type="radio" id="Fac-no" value="false">
+                    <label class="yn-btn" for="Fac-no">No</label>
+                </div>
+                <span asp-validation-for="Rating.IsFacilities" class="text-danger"></span>
+            </div>
+            @* IsPrivacy *@
+            <div class="question-row">
+                <span>Was the privacy on the farm good?</span>
+                <div class="button-group">
+                    <input style="display:none" asp-for="Rating.IsPrivacy" type="radio" id="priv-yes" value="true">
+                    <label class="yn-btn" for="priv-yes">Yes</label>
+
+                    <input style="display:none" asp-for="Rating.IsPrivacy" type="radio" id="priv-no" value="false">
+                    <label class="yn-btn" for="priv-no">No</label>
+                </div>
+                <span asp-validation-for="Rating.IsPrivacy" class="text-danger"></span>
+            </div>
+            @* Comment *@
+            <div class="textarea-container">
+                <label asp-for="Rating.Comment">Comment</label>
+                <textarea asp-for="Rating.Comment" placeholder="Share your experience..."></textarea>
+            </div>
+            @* rating *@
+            <div class="rating-row">
+                <span>Overall farm rating</span>
+                <div class="stars">
+                    <span class="star" data-rating="1">&#9733;</span>
+                    <span class="star" data-rating="2">&#9733;</span>
+                    <span class="star" data-rating="3">&#9733;</span>
+                    <span class="star" data-rating="4">&#9733;</span>
+                    <span class="star" data-rating="5">&#9733;</span>
+                    <input type="hidden" asp-for="Rating.stars" id="ratingInput" value="0">
+                </div>
+            </div>
+
+            <div class="send-button-container">
+                <button asp-action="Myboking" class="cancel-btn">Cancel</button>
+                <button asp-route-bookingId="@Model.Boking.Id" type="submit" class="send-btn">Send</button>
+            </div>
+        </div>
+    </form>
+</div>
+@* Script For Stars *@
+<script src="~/js/RatingJs.js"></script>

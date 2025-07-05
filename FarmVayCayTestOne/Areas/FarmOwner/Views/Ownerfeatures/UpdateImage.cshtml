@@ -1,0 +1,30 @@
+﻿@using Farm.Models.Models
+@model FarmImages
+<link rel="stylesheet" href="~/css/UpdateImage.css">
+@* <link rel="stylesheet" href="navbar.css"> *@
+
+<main class="main-container">
+    <div class="update-image-wrapper">
+        <h1>Update Farm Image</h1>
+        <p class="subtitle">Upload a new image for your farm</p>
+
+        <div class="current-image-container">
+            <h2>Current Image</h2>
+            <img id="current-image" src="@Model.ImageUrl" alt="Current farm image">
+        </div>
+
+        <form asp-action="UpdateImage" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label for="new-image">Select New Image</label>
+                <input type="file" asp-for="ImageUrl" name="file"  required>
+            </div>
+
+            <div class="button-group">
+                <a asp-action="FarmOwner" asp-action="EditFarm" asp-route-farmId="@Model.FarmId" class="cancel-btn">Cancel</a>
+                <button type="submit" class="update-btn">Update Image</button>
+            </div>
+        </form>
+    </div>
+</main>
+

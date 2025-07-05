@@ -1,0 +1,116 @@
+﻿@using Farm.Utility
+@model Farm.Models.Models.Boking
+
+<link rel="stylesheet" href="~/css/OwnerFarms.css" />
+
+<style>
+    .page-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+        min-height: 100vh;
+        background-color: #f9f9f9;
+    }
+
+    .farm-card {
+        width: 500px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .farm-info p {
+        margin: 8px 0;
+    }
+
+    .farm-info h3 {
+        margin-bottom: 15px;
+        font-size: 22px;
+        color: #333;
+    }
+
+    .farm-actions {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .btn {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        color: white;
+        background-color: #dc3545;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #bd2130;
+        }
+
+    .cancelled-label {
+        color: red;
+        font-weight: bold;
+    }
+
+    .completed-label {
+        color: green;
+        font-weight: bold;
+    }
+
+    .back-btn {
+        margin-top: 20px;
+        display: inline-block;
+        background-color: #3dd5bf;
+        padding: 8px 14px;
+        border-radius: 6px;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+        .back-btn:hover {
+            background-color: #31baa7;
+        }
+</style>
+
+<div class="page-wrapper">
+    <div class="farm-card">
+
+        <div class="farm-info">
+            <h3>@Model.Farm.FarmName</h3>
+            <p> <strong>Custmor Name :</strong>@Model.Custmor.FirstName  @Model.Custmor.LastName </p>
+            <p><strong>Location:</strong> <a href="@Model.Farm.LocationUrl" target="_blank">@Model.Farm.Governorates</a></p>
+            <p><strong>Price:</strong> JD @Model.Farm.PricePerDay / Night</p>
+            <p><strong>ID:</strong> @Model.Id</p>
+            <p><strong>Check-In Date:</strong> @Model.StartDate.ToString("yyyy-MM-dd HH:mm")</p>
+            <p><strong>Check-Out Date:</strong> @Model.EndDate.ToString("yyyy-MM-dd HH:mm")</p>
+            <p><strong>Payment Status:</strong> @Model.PaymentStatus</p>
+            <p><strong>Booking Status:</strong> @Model.BookingStatus</p>
+        </div>
+
+        <div class="farm-actions">
+            @if (Model.BookingStatus == SD.Booking_Canceled)
+            {
+                <label class="cancelled-label">Canceled</label>
+                <br />
+                
+            }
+            else if (Model.BookingStatus == SD.Booking_Completed)
+            {
+                <label class="completed-label">Completed</label>
+            }
+            else
+            {
+                <a href="javascript:void(0)" class="btn" onclick="confirmDelete('@Url.Action("Cancelation", "Booking", new { BookingId = Model.Id })')">Cancel</a>
+            }
+        </div>
+
+        <a href="javascript:history.back()" class="back-btn">← Back</a>
+    </div>
+</div>

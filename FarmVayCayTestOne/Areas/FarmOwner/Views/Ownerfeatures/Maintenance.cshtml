@@ -1,0 +1,37 @@
+﻿@using Farm.Models.Models
+@model List<Maintenance>
+
+<link rel="stylesheet" href="~/css/Tabels.css">
+<div class="request-container">
+
+    <div class="request-header">
+        <h1 class="request-title">Maintenance List</h1>
+        <div class="header-buttons">
+            <a asp-area="FarmOwner" asp-action="Maintenance" asp-route-mager="Elec" class="header-btn add-btn">Electrician</a>
+            <a asp-area="FarmOwner" asp-action="Maintenance" asp-route-mager="water" class="header-btn export-btn">Plumber</a>
+            <a asp-area="FarmOwner" asp-action="Maintenance" asp-route-mager="iron" class="header-btn deleted-btn">BlackSmith</a>
+            <a asp-area="FarmOwner" asp-action="Maintenance" asp-route-mager="gar" class="header-btn add-btn">Garden Design</a>
+        </div>
+    </div>
+    <table class="request-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Mager</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var main in Model)
+            {
+                <tr>
+                    <td>@main.Name</td>
+                    <td>@main.PhoneNumber</td>
+                    <td>@main.Magor</td>
+                    <td>@main.Location</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

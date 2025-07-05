@@ -1,0 +1,133 @@
+﻿/* تنسيق عام للصفحة */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+/* حاوية المحتوى */
+.request-container {
+    width: 80%;
+    margin: 60px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* عنوان الجدول */
+.request-title {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+}
+
+/* تنسيق الجدول */
+.request-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .request-table th, .request-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+
+    .request-table th {
+        background-color: #3dd5bf;
+        color: white;
+    }
+
+    .request-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+/* تنسيق أزرار العرض والحذف */
+.action-buttons {
+    display: flex;
+    gap: 10px; /* المسافة بين الأزرار */
+    justify-content: center; /* توسيط الأزرار داخل الخلية */
+}
+
+.view-button, .delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.view-button {
+    background-color: #3dd5bf;
+}
+
+    .view-button:hover {
+        background-color: #2bb5a1;
+    }
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+    .delete-button:hover {
+        background-color: #b02030;
+    }
+
+    .view-button i, .delete-button i {
+        font-size: 20px;
+    }
+.request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.header-btn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.add-btn {
+    background: #28a745;
+    color: white;
+}
+
+.export-btn {
+    background: #007bff;
+    color: white;
+}
+
+.deleted-btn {
+    background: #dc3545;
+    color: white;
+}
+.All-btn {
+    background: #3dd5bf;
+    color: white;
+}
+
+.header-btn:hover {
+    filter: brightness(90%);
+}

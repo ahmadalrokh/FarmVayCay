@@ -1,0 +1,40 @@
+﻿ @using Farm.Models.Models 
+ @model Maintenance 
+ <link rel="stylesheet" href="~/css/AddForm.css"> 
+<div class="container">
+    <div class="form-container">
+        <h1>Add Maintenance Service</h1>
+        <form method="post" id="maintenanceForm">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="Name" >Full Name</label>
+                <input type="text" asp-for="Name"  required>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber" >Phone Number</label>
+                <input type="tel" asp-for="PhoneNumber"  required>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Location">Governorate</label>
+                <input type="text" asp-for="Location" required>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Magor" >Service Type</label>
+                <select asp-for="Magor"  required>
+                    <option value="">Select a service type</option>
+                    <option value="Electrician">Electrician</option>
+                    <option value="Water">Water Maintenance</option>
+                    <option value="Blacksmeth">Blacksmithing</option>
+                    <option value="Garden Design">Garden designer</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">+ Add Service</button>
+        </form>
+    </div>
+</div>
+

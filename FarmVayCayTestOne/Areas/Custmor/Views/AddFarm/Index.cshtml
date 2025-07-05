@@ -1,0 +1,196 @@
+﻿@using Farm.Models.Models
+@model Farms
+    <link rel="stylesheet" href="~/css/AddFarm.css">
+    
+    <main class="main-container">
+        <div class="add-farm-wrapper">
+            <h1>Add farm</h1>
+            <p class="subtitle">Fill in the details below to add a farm to the listing</p>
+            
+            <form class="add-farm-form" method="post" enctype="multipart/form-data">
+
+                <div class="form-row">
+                     @* FarmName *@
+                    <div class="form-group">
+                        <label asp-for="FarmName">Farm name</label>
+                        <input asp-for="FarmName" placeholder="Farm name">
+                         <span asp-validation-for="FarmName" class="text-danger"></span>
+                    </div>
+                    @* PricePerDay *@
+                    <div class="form-group">
+                        <label asp-for="PricePerDay" >Price per Day</label>
+                        <input asp-for="PricePerDay" placeholder="Enter price in JD">
+                        <span asp-validation-for="PricePerDay" class="text-danger"></span>
+                    </div>
+                </div>
+                   
+                <div class="form-row">
+                    @* Goverments *@
+                    <div class="form-group">
+                        <label asp-for="Governorates">Governorates</label>
+                        <div class="select-wrapper">
+                            <select asp-for="Governorates">
+                                <option value="amman">Amman</option>
+                                <option value="irbid">Irbid</option>
+                                <option value="zarqa">Zarqa</option>
+                                <option value="aqaba">Aqaba</option>
+                                <option value="mafraq">Mafraq</option>
+                                <option value="balqa">Balqa</option>
+                                <option value="madaba">Madaba</option>
+                                <option value="karak">karak</option>
+                                <option value="tafilah">Tafilah</option>
+                                <option value="maan">Maan</option>
+                                <option value="jerash">jerash</option>
+                                <option value="ajloun">Ajloun</option>
+
+                            </select>
+                        </div>
+                         <span asp-validation-for="Governorates" class="text-danger"></span>
+                    </div>
+                     @* LocationUrl *@
+                    <div class="form-group">
+                        <label asp-for="LocationUrl">Location Url</label>
+                        <input asp-for="LocationUrl" placeholder="Enter location">
+                    <span asp-validation-for="LocationUrl" class="text-danger"></span>
+                    </div>
+                </div>
+                @* Description *@
+                <div class="form-group">
+                    <label asp-for="Description">Description</label>
+                    <textarea asp-for="Description" placeholder="Enter Description" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                @* FarmImages *@
+                <div class="form-group">
+                    <label asp-for="FarmImages">Add images</label>
+                    <input  type="file" name="files" multiple class="file-input">
+                </div>
+
+                <div class="amenities-section">
+
+                    <div class="amenities-row">
+                         @* Room *@
+                        <div class="amenity-group">
+                            <label asp-for="Room">Rooms</label>
+                            <input asp-for="Room"  min="0">
+                            <span asp-validation-for="Room" class="text-danger"></span>
+                        </div>
+                         @* PathRoom *@
+                        <div class="amenity-group">
+                            <label asp-for="PathRoom">Bath rooms</label>
+                            <input asp-for="PathRoom" min="0">
+                            <span asp-validation-for="PathRoom" class="text-danger"></span>
+                        </div>
+                        @* Flors *@
+                        <div class="amenity-group">
+                            <label asp-for="Flors">Floors</label>
+                            <input asp-for="Flors" min="0">
+                             <span asp-validation-for="Flors" class="text-danger"></span>
+                        </div>
+                        @* Guests *@
+                        <div class="amenity-group">
+                            <label asp-for="Guests">Guests</label>
+                            <input asp-for="Guests" min="0">
+                            <span asp-validation-for="Guests" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="features-grid">
+                        @* SwimingPool *@
+                        <div class="feature-item">
+                            <label asp-for="SwimingPool">Swimming Pool</label>
+                            <div class="radio-group">
+                                <input asp-for="SwimingPool" type="radio" id="pool-yes" value="true">
+                                <label for="pool-yes">Yes</label>
+
+                                <input asp-for="SwimingPool" type="radio" id="pool-no" value="false">
+                                <label for="pool-no">No</label>
+
+                                <span asp-validation-for="SwimingPool" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @* BarbecueArea *@
+                        <div class="feature-item">
+                        <label asp-for="BarbecueArea">Barbecue area</label>
+                            <div class="radio-group">
+                                <input asp-for="BarbecueArea" type="radio" id="bbq-yes" value="true">
+                                <label  for="bbq-yes">yes</label>
+                                <input asp-for="BarbecueArea" type="radio" id="bbq-no" value="false">
+                                <label for="bbq-no">No</label>
+                                <span asp-validation-for="BarbecueArea" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @* ChildrenArea *@
+                        <div class="feature-item">
+                            <label asp-for="ChildrenArea">Children's play area</label>
+                            <div class="radio-group">
+                                <input asp-for="ChildrenArea" type="radio"  id="playground-yes" value="true">
+                                <label for="playground-yes">yes</label>
+                                <input asp-for="ChildrenArea" type="radio" id="playground-no" value="false">
+                                <label for="playground-no">No</label>
+                                <span asp-validation-for="ChildrenArea" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @* FootballField *@
+                        <div class="feature-item">
+                            <label asp-for="FootballField">Football field</label>
+                            <div class="radio-group">
+                                <input asp-for="FootballField" type="radio"  id="football-yes" value="true">
+                                <label for="football-yes">yes</label>
+                                <input asp-for="FootballField" type="radio"  id="football-no" value="false">
+                                <label for="football-no">No</label>
+                                <span asp-validation-for="ChildrenArea" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @* BingPongTabel *@
+                        <div class="feature-item">
+                            <label asp-for="BingPongTabel">Ping-pong table</label>
+                            <div class="radio-group">
+                                <input asp-for="BingPongTabel" type="radio"  id="pingpong-yes" value="true">
+                                <label for="pingpong-yes">yes</label>
+                                <input asp-for="BingPongTabel" type="radio"  id="pingpong-no" value="false">
+                                <label for="pingpong-no">No</label>
+                                <span asp-validation-for="BingPongTabel" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @* BilliardoTabel *@
+                        <div class="feature-item">
+                            <label asp-for="BilliardoTabel">Billiards table</label>
+                            <div class="radio-group">
+                                <input asp-for="BilliardoTabel" type="radio" id="billiards-yes" value="true">
+                                <label for="billiards-yes">yes</label>
+                                <input asp-for="BilliardoTabel" type="radio"  id="billiards-no" value="false">
+                                <label for="billiards-no">No</label>
+                                <span asp-validation-for="BilliardoTabel" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @* AirCondtioner *@
+                        <div class="feature-item">
+                            <label asp-for="AirCondtioner" >Air conditioner</label>
+                            <div class="radio-group">
+                            <input asp-for="AirCondtioner" type="radio"  id="ac-yes" value="true">
+                                <label for="ac-yes">yes</label>
+                                <input asp-for="AirCondtioner" type="radio"  id="ac-no"value="false">
+                                <label for="ac-no">No</label>
+                            <span asp-validation-for="AirCondtioner" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @* Wifi *@
+                        <div class="feature-item">
+                            <label asp-for="WIFI">Wifi</label>
+                            <div class="radio-group">
+                                <input asp-for="WIFI" type="radio" name="wifi" id="wifi-yes" value="true">
+                                <label for="wifi-yes">yes</label>
+                                <input asp-for="WIFI" type="radio" name="wifi" id="wifi-no" value="false">
+                                <label for="wifi-no">No</label>
+                                <span asp-validation-for="WIFI" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="next-btn">Save!</button>
+                
+            </form>
+        </div>
+    </main>

@@ -1,0 +1,41 @@
+﻿@using Farm.Utility
+@model Farm.Models.VM.FarmVM
+
+<div class="farm-card">
+    @* <img src="@Model.farmImages.FirstOrDefault()?.ImageUrl" alt="Farm Image" class="farm-img" /> *@
+    <div class="farm-info">
+        <h3>@Model.Farms.FarmName</h3>
+        <p><strong>Location:</strong> <a href="@Model.Farms.LocationUrl" target="_blank">@Model.Farms.Governorates</a></p>
+        <p><strong>Price:</strong> JD @Model.Farms.PricePerDay / Night</p>
+        <p><strong>ID:</strong> @Model.boking.Id</p>
+        <p><strong>Check-In Date:</strong> @Model.boking.StartDate</p>
+        <p><strong>Check-Out Date:</strong> @Model.boking.EndDate</p>
+        <p><strong>Payment Status:</strong> @Model.boking.PaymentStatus</p>
+        <p><strong>Booking Status:</strong> @Model.boking.BookingStatus</p>
+    </div>
+
+    <div class="farm-actions">
+        @if (Model.boking.BookingStatus == SD.Booking_Canceled)
+        {
+            <label style="color:red;">Canceled</label>
+
+            <br />
+            <a href="javascript:void(0)" class="btn disable-btn" onclick="confirmDelete('@Url.Action("DeleteBooking", "Booking", new { BookingId = Model.boking.Id })')">Delete</a>
+        }
+        else if (Model.boking.BookingStatus == SD.Booking_Completed)
+        {
+            <label style="color:green;">Completed</label>
+
+            <br />
+            @if (!Model.boking.IsRating)
+            {
+                <a asp-action="Rating" asp-route-bookingId="@Model.boking.Id" asp-route-farmId="@Model.Farms.Id" class="btn edit-btn">Rating</a>
+            }
+            <a href="javascript:void(0)" class="btn disable-btn" onclick="confirmDelete('@Url.Action("DeleteBooking", "Booking", new { BookingId = Model.boking.Id })')">Delete</a>
+        }
+        else
+        {
+            <a href="javascript:void(0)" class="btn disable-btn" onclick="confirmDelete('@Url.Action("Cancelation", "Booking", new { BookingId = Model.boking.Id })')">Cancel</a>
+        }
+    </div>
+</div>

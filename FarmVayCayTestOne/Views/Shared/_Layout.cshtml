@@ -1,0 +1,147 @@
+﻿@using Farm.Utility
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FarmVayCay</title>
+    <script type="importmap"></script>
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+   
+    <link rel="stylesheet" href="~/FarmVayCayTestOne.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+
+</head>
+<body>
+    <header>
+
+        <nav class="navbar">
+            <div class="nav-content">
+                <a  class="logo">FarmVayCay</a>
+                <div class="nav-links">
+                    <a  class="nav-link active" asp-area="Custmor" asp-controller="Home" asp-action="Index">Home</a>
+                    <a asp-area="Custmor" asp-controller="Farms" asp-action="Index" class="nav-link">Farms</a>
+                    <a asp-area="Custmor" asp-controller="Booking" asp-action="MyBoking" class="nav-link">My bookings</a>
+                    <a asp-area="Custmor" asp-controller="Favorite" asp-action="Index" class="nav-link">Favorites</a>
+                     @if(User.IsInRole(SD.Role_Admin)){ 
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="managementDropdown">
+                                <i class="bi bi-chevron-down"></i>  Management
+                            </a>
+                            <div class="dropdown-menu">
+                                <a asp-area="Admin" asp-controller="RequestsFarms" asp-action="Index" class="dropdown-item">Requested farms</a>
+                                <a asp-area="Admin" asp-controller="AvailableFarms" asp-action="Index" class="dropdown-item">
+                                   Available Farms</a>
+                                <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="dropdown-item">Users</a>
+                                <a asp-area="Admin" asp-controller="BokingList" asp-action="Index" class="dropdown-item">Booking list</a>
+                                <a asp-area="Admin" asp-controller="Maintenance" asp-action="Index" class="dropdown-item">Maintenance</a>
+                                <a asp-area="Identity" asp-page="/Account/Register" class="dropdown-item">Add User</a>
+                            </div>
+                        </div>
+                     } 
+                </div>
+                <div class="nav-actions">
+
+                    <div class="menu-container">
+                        <a href="#" class="menu-icon">
+                            <i class="bi bi-list"></i>
+                        </a>
+                        <div class="menu-dropdown">
+                            @if (User.Identity?.IsAuthenticated ?? false)
+                            {
+                                <a class="menu-item" asp-area="Custmor" asp-controller="Profile" asp-action="Index" >Acount</a>
+                                if(!User.IsInRole(SD.Role_Admin)){
+                                    <a class="menu-item" asp-area="Custmor" asp-controller="AddFarm" asp-action="Index">Add Farm</a>
+                                }
+                            }
+                            else{
+                                <a class="menu-item" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                <a class="menu-item" asp-area="Identity" asp-page="/Account/Register">Sign up</a>
+                            }
+                            @if (User.IsInRole(SD.Role_FarmOwner))
+                            {
+                                <a class="menu-item" asp-area="FarmOwner" asp-controller="OwnerFeatures" asp-action="MyFarms">My Farms</a>
+                                <a class="menu-item" asp-area="FarmOwner" asp-controller="Ownerfeatures" asp-action="Maintenance">Maintenance</a>
+                                <a class="menu-item" asp-area="FarmOwner" asp-controller="Ownerfeatures" asp-action="BookingHistory">My Bookings</a>
+
+                            }
+                            
+                            <a href="#" class="menu-item">Help Center</a>
+                            @if (User.Identity?.IsAuthenticated ?? false)
+                            {
+                                <a class="menu-item">
+                                <form id="logoutForm"  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button style="background:transparent; border-color:transparent;" id="logout" type="submit">Logout</button>
+                                </form>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        @* <a id="manage" class="menu-item" asp-area="Custmor" asp-controller="Profile" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a> *@
+                        <h5>Hello @UserManager.GetUserName(User)!</h5>
+                        <a  class="profile-icon" asp-area="Custmor" asp-controller="Profile" asp-action="Index">
+
+                            <i class="bi bi-person-circle"></i>
+                        </a>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <partial name="_SuccsessNotification" />
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dropdownToggle = document.getElementById("managementDropdown");
+            const dropdownMenu = dropdownToggle.nextElementSibling;
+
+            dropdownToggle.addEventListener("click", function (event) {
+                event.preventDefault();
+                dropdownMenu.classList.toggle("show");
+                event.stopPropagation(); 
+            });
+
+            document.addEventListener("click", function () {
+                dropdownMenu.classList.remove("show"); 
+            });
+
+            dropdownMenu.addEventListener("click", function (event) {
+                event.stopPropagation(); 
+            });
+        });
+    </script>
+    <!--notification script-->
+    <script>
+        $(document).ready(function () {
+            var successMessage = '@TempData["success"]';
+            var errorMessage = '@TempData["error"]';
+
+            if (successMessage) {
+                toastr.success(successMessage, 'Success');
+            }
+
+            if (errorMessage) {
+                toastr.error(errorMessage, 'Error');
+            }
+        });
+    </script>  
+   
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

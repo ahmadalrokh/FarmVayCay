@@ -1,0 +1,369 @@
+﻿/* === Reset and Global Styles === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.main-container {
+    padding: 80px 20px 40px;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* === Search Bar Styles === */
+.search-container {
+    margin-bottom: 30px;
+    z-index: 10;
+    padding: 10px 0;
+}
+
+.search-bar {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 30px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+    .search-bar input {
+        flex: 1;
+        padding: 15px 20px;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+    }
+
+.search-button {
+    padding: 0 25px;
+    background: #3dd5bf;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+    .search-button:hover {
+        background: #2cc1ac;
+    }
+/*===no Resalet mathched ===*/
+#noResultsMessage {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(255, 0, 0, 0.8); /* لون خلفية أحمر مع شفافية */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999; /* تأكد من أن الرسالة تظهر فوق جميع العناصر */
+}
+/*===filter Butuns Style===*/
+.filter-option {
+    margin-bottom: 10px;
+}
+
+.filter-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: #e0e0e0;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    .filter-button:hover {
+        background-color: #3dd5bf;
+        color: white;
+    }
+
+    /* لو بدك تخلي الخيار المحدد يبان بلون مختلف */
+    .filter-button.active {
+        background-color: #3dd5bf;
+        color: white;
+    }
+
+/* === Content Layout === */
+
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* === Filters Section === */
+.filters {
+    width: 250px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    margin-left: 40px;
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+    .filters h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+.filter-section {
+    margin-bottom: 25px;
+}
+
+    .filter-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        color: #444;
+    }
+
+.filter-option {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .filter-option label {
+        color: #666;
+        cursor: pointer;
+    }
+.research-btn {
+    width: 100%;
+    padding: 12px;
+    background: #3dd5bf;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+}
+
+    .research-btn:hover {
+        background: #2cc1ac;
+    }
+/* === Farms Grid === */
+.farms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* توزيع مرن مع تصغير البطاقات */
+    gap: 20px;
+    max-width: calc(100% - 300px); /* منع تجاوز الفلتر */
+    margin: 0 auto;
+    padding: 20px;
+}
+.farm-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+/*    cursor: pointer;*/
+}
+/* البطاقة الخاصة بالمزرعة */
+.farm-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display:grid;
+}
+
+    .farm-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    }
+
+/* صورة المزرعة */
+.farm-image {
+    position: relative;
+    padding-top: 60%; /* تناسب أفضل مع الصورة */
+}
+
+    .farm-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+/* زر المفضلة */
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+    .favorite-btn i {
+        color: #666;
+        font-size: 1rem;
+        transition: color 0.2s ease-in-out;
+    }
+
+    .favorite-btn:hover i {
+        color: #ff4b4b;
+    }
+
+/* تفاصيل المزرعة */
+.farm-details {
+    padding: 15px;
+}
+
+    .farm-details h3 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+        color: #222;
+    }
+
+    .farm-details p {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+
+/* السعر والتقييم */
+.price-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.price {
+    color: #333;
+}
+
+.rating {
+    color: #3dd5bf;
+}
+
+
+/* التأكد من أن الشبكة تبقى بجانب الفلتر */
+.content-wrapper {
+    display: flex;
+    gap: 30px;
+}
+/*Link*/
+
+/* besy farm */
+/* Busy Status Styles */
+
+.farm-card.busy {
+    position: relative;
+}
+
+.busy-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    pointer-events: none; /* This allows clicks to pass through the overlay */
+}
+
+.busy-text {
+    background: #ff4b4b;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transform: rotate(-15deg);
+    pointer-events: none; /* This ensures the text doesn't block clicks either */
+}
+/* ---------------------------- */
+
+/* تحسين التصميم على الشاشات الصغيرة */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .farms-grid {
+        max-width: 100%;
+    }
+
+    .filters {
+        width: 100%;
+        position: relative;
+    }
+}
+
+@media (max-width: 768px) {
+    .farms-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* يجعل الشبكة مرنة حسب حجم الشاشة */
+        gap: 20px;
+    }
+
+    .farm-details {
+        padding: 15px;
+    }
+
+        .farm-details h3 {
+            font-size: 1.1rem;
+        }
+
+        .farm-details p {
+            font-size: 0.9rem;
+        }
+}
+
+@media (max-width: 480px) {
+    .farms-grid {
+        grid-template-columns: 1fr; /* عرض المزارع بعمود واحد على الشاشات الصغيرة */
+    }
+
+    .farm-card {
+        padding: 15px;
+    }
+
+    .farm-image {
+        padding-top: 60%;
+    }
+
+    .farm-details {
+        padding: 10px;
+    }
+}
